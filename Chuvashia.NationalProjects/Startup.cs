@@ -1,5 +1,6 @@
 using System.IO;
 using System.Net;
+using System.Text.Json.Serialization;
 using Chuvashia.NationalProjects.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,9 +26,16 @@ namespace Chuvashia.NationalProjects
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DbConnection");
+
             services.AddDbContext<NationalProjectsDbContext>(options =>
                 options.UseSqlServer(connection));
-            services.AddControllers();
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+
             services.AddSwaggerGen(swagger => {
                 swagger.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Swagger" });
                 swagger.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Chuvashia.NationalProjects.xml"));
@@ -47,7 +55,6 @@ namespace Chuvashia.NationalProjects
             {
                 options.SwaggerEndpoint("../swagger/v1/swagger.json", "Chuvashia National Projects Api");
             });
-
             app.UseRewriter(new RewriteOptions().AddRedirect(@"^$", "swagger", (int)HttpStatusCode.Redirect));
 
             app.UseRouting();
