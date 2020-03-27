@@ -1,4 +1,5 @@
 using Chuvashia.NationalProjects.Context;
+using Chuvashia.NationalProjects.Gallery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
+using System;
 using System.IO;
 using System.Net;
 using System.Text.Json.Serialization;
@@ -35,6 +37,11 @@ namespace Chuvashia.NationalProjects
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
+
+            services.AddHttpClient<GalleryClient>(o => {
+                o.BaseAddress = new Uri("https://api.imgur.com/3/");
+                o.DefaultRequestHeaders.Add("Authorization", "Bearer 6b472e0fc1169c59424743b3e089f706e0f1fd31");
+            });
 
             services.AddSwaggerGen(swagger =>
             {
