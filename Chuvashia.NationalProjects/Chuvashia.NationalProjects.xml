@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chuvashia.NationalProjects</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:Chuvashia.NationalProjects.Controllers.CountersController.GetCounters(System.Threading.CancellationToken)" -->
+        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.AddCounter(Chuvashia.NationalProjects.Model.Counter,System.Threading.CancellationToken)">
+            <summary>
+            Create new counter
+            </summary>
+            <param name="counter">New counter</param>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.RemoveCounter(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Remove counter
+            </summary>
+            <param name="id">Counter id</param>
+        </member>
+    </members>
+</doc>
