@@ -1,10 +1,6 @@
 ﻿using Chuvashia.NationalProjects.Model;
 using Chuvashia.NationalProjects.Model.News;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Chuvashia.NationalProjects.Context
 {

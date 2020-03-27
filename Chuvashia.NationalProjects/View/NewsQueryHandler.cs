@@ -31,7 +31,7 @@ namespace Chuvashia.NationalProjects.View
 
             #endregion
 
-            if(binding.Type.ToString() == NewsTypeBinding.All.ToString())
+            if (binding.Type.ToString() == NewsTypeBinding.All.ToString())
             {
                 newsQuery = newsQuery.OrderByDescending(o => o.CreateDate);
 

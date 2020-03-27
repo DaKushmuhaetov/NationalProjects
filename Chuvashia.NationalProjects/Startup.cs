@@ -1,6 +1,3 @@
-using System.IO;
-using System.Net;
-using System.Text.Json.Serialization;
 using Chuvashia.NationalProjects.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
+using System.Net;
+using System.Text.Json.Serialization;
 
 namespace Chuvashia.NationalProjects
 {
@@ -36,7 +36,8 @@ namespace Chuvashia.NationalProjects
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
 
-            services.AddSwaggerGen(swagger => {
+            services.AddSwaggerGen(swagger =>
+            {
                 swagger.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Swagger" });
                 swagger.IncludeXmlComments(Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "Chuvashia.NationalProjects.xml"));
             });

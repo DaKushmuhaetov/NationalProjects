@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Chuvashia.NationalProjects.Binding;
+﻿using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Chuvashia.NationalProjects.Controllers
 {
@@ -51,7 +51,8 @@ namespace Chuvashia.NationalProjects.Controllers
                 return BadRequest($"Counter with Type: {binding.Type} already created");
             }
 
-            var counter = new Counter() {
+            var counter = new Counter()
+            {
                 Id = Guid.NewGuid(),
                 Type = binding.Type,
                 Amount = binding.Amount
