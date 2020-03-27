@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,6 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Get list of counters
         /// </summary>
-        /// <response code="200"></returns>
         [HttpGet("counters")]
         [ProducesResponseType(typeof(List<Counter>), 200)]
         public async Task<ActionResult<List<Counter>>> GetCounters(
@@ -37,19 +37,31 @@ namespace Chuvashia.NationalProjects.Controllers
         /// </summary>
         /// <param name="counter">New counter</param>
         [HttpPost("counters")]
-        public async Task<IActionResult> AddCounter([FromBody] Counter counter,
+        [ProducesResponseType(typeof(Counter), 201)]
+        public async Task<ActionResult<Counter>> AddCounter([FromBody] CounterBinding binding,
             CancellationToken cancellationToken)
         {
-            var dbCounter = await _context.Counters.Where(o => o.Type == counter.Type).SingleOrDefaultAsync();
+            var dbCounter = await _context.Counters
+                .AsNoTracking()
+                .Where(o => o.Type == binding.Type)
+                .SingleOrDefaultAsync();
+
             if (dbCounter != null)
             {
-                return BadRequest($"Counter with Type: {counter.Type} already created");
+                return BadRequest($"Counter with Type: {binding.Type} already created");
             }
+
+            var counter = new Counter() {
+                Id = Guid.NewGuid(),
+                Type = binding.Type,
+                Amount = binding.Amount
+            };
+
 
             _context.Counters.Add(counter);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Ok();
+            return Ok(counter);
         }
 
         /// <summary>
@@ -66,6 +78,27 @@ namespace Chuvashia.NationalProjects.Controllers
             await _context.SaveChangesAsync(cancellationToken);
 
             return Ok();
+        }
+
+        /// <summary>
+        /// Update counter
+        /// </summary>
+        [HttpPut("counter/{id}/{amount}")]
+        public async Task<ActionResult<Counter>> UpdateCounter([FromRoute]Guid id,
+            [FromRoute]decimal amount,
+            CancellationToken cancellationToken)
+        {
+            if (amount < 0)
+                return ValidationProblem($"Amount must be greater or equal than 0. Amount was: {amount}");
+
+            var counter = await _context.Counters.Where(o => o.Id == id).FirstOrDefaultAsync(cancellationToken);
+            if (counter == null)
+                return NotFound();
+
+            counter.Amount = amount;
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Ok(counter);
         }
     }
 }

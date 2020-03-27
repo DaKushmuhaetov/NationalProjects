@@ -4,8 +4,12 @@
         <name>Chuvashia.NationalProjects</name>
     </assembly>
     <members>
-        <!-- Badly formed XML comment ignored for member "M:Chuvashia.NationalProjects.Controllers.CountersController.GetCounters(System.Threading.CancellationToken)" -->
-        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.AddCounter(Chuvashia.NationalProjects.Model.Counter,System.Threading.CancellationToken)">
+        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.GetCounters(System.Threading.CancellationToken)">
+            <summary>
+            Get list of counters
+            </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.AddCounter(Chuvashia.NationalProjects.Binding.CounterBinding,System.Threading.CancellationToken)">
             <summary>
             Create new counter
             </summary>
@@ -16,6 +20,26 @@
             Remove counter
             </summary>
             <param name="id">Counter id</param>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.UpdateCounter(System.Guid,System.Decimal,System.Threading.CancellationToken)">
+            <summary>
+            Update counter
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Model.Admin.FirstName">
+            <summary>
+            Фамилия
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Model.Admin.MiddleName">
+            <summary>
+            Имя
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Model.Admin.LastName">
+            <summary>
+            Отчество
+            </summary>
         </member>
     </members>
 </doc>

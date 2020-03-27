@@ -11,7 +11,8 @@ namespace Chuvashia.NationalProjects.Context
     {
         public NationalProjectsDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<Counter> Counters { get; set; }
+        internal DbSet<Counter> Counters { get; set; }
+        internal DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,34 @@ namespace Chuvashia.NationalProjects.Context
                     .IsRequired();
                 builder.Property(o => o.Amount)
                     .HasColumnType("decimal")
+                    .IsRequired();
+            });
+            modelBuilder.Entity<Admin>(builder =>
+            {
+                builder.ToTable("Admins");
+                builder.HasKey(o => o.Id);
+                builder.Property(o => o.Id)
+                    .ValueGeneratedNever();
+                builder.Property(o => o.FirstName)
+                    .HasMaxLength(32)
+                    .IsRequired();
+                builder.Property(o => o.MiddleName)
+                    .HasMaxLength(32)
+                    .IsRequired();
+                builder.Property(o => o.LastName)
+                    .HasMaxLength(32)
+                    .IsRequired();
+                builder.Property(o => o.Phone)
+                    .HasMaxLength(32)
+                    .IsRequired();
+                builder.Property(o => o.Login)
+                    .HasMaxLength(128)
+                    .IsRequired();
+                builder.Property(o => o.Password)
+                    .HasMaxLength(128)
+                    .IsRequired();
+                builder.Property(o => o.Role)
+                    .HasConversion<string>()
                     .IsRequired();
             });
         }
