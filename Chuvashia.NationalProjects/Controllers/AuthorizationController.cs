@@ -1,5 +1,7 @@
-﻿using Chuvashia.NationalProjects.Context;
+using Chuvashia.NationalProjects.Binding;
+using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
+using Chuvashia.NationalProjects.View;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,10 +10,11 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Chuvashia.NationalProjects.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class AuthorizationController : ControllerBase
     {
@@ -21,9 +24,7 @@ namespace Chuvashia.NationalProjects.Controllers
             _context = context;
         }
 
-
-
-        private GetToken(Admin admin)
+        private AuthorizationAdminView GetToken(Admin admin)
         {
             var claims = new List<Claim>
             {
@@ -33,9 +34,6 @@ namespace Chuvashia.NationalProjects.Controllers
             ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                     ClaimsIdentity.DefaultRoleClaimType);
-            
-
-           
 
             var now = DateTime.Now;
 
@@ -48,21 +46,25 @@ namespace Chuvashia.NationalProjects.Controllers
                     signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            var response = new
+            var response = new AuthorizationAdminView
             {
-                access_token = encodedJwt,
-                Login = claimsIdentity.Name
+                Bearer = encodedJwt,
+                Admin = admin
             };
-            return Json(response);
+            return response;
         }
-        //Get :api/Autorization
-        [HttpPost]
-        public async Task<ActionResult<Admin>> PostAtorization(string Login,string Password)
+        
+        [HttpPost("login")]
+        public async Task<ActionResult<Admin>> Login([FromBody]AuthorizationBinding binding)
         {
-            Admin admin = await(_context.Admins.Where(o => o.Login == Login && o.Password == Password).FirstOrDefaultAsync());
+            Admin admin = await _context.Admins.Where(o => o.Login == binding.Login && o.Password == binding.Password).FirstOrDefaultAsync();
             if (admin != null)
             {
-                return()
+                return Ok(GetToken(admin));
+            }
+            else
+            {
+                return Unauthorized();
             }
         } 
     }

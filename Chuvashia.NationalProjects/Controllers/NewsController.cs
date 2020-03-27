@@ -119,7 +119,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// </summary>
         /// <param name="id">News post id</param>
         [HttpPut("news/unarchive/{id}")]
-        public async Task<IActionResult<NewsPost>> UnArchivePost(
+        public async Task<ActionResult<NewsPost>> UnArchivePost(
             [FromRoute] Guid id,
             CancellationToken cancellationToken)
         {
