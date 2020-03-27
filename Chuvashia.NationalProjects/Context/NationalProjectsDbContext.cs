@@ -1,9 +1,6 @@
 ﻿using Chuvashia.NationalProjects.Model;
+using Chuvashia.NationalProjects.Model.News;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Chuvashia.NationalProjects.Context
 {
@@ -13,6 +10,7 @@ namespace Chuvashia.NationalProjects.Context
 
         internal DbSet<Counter> Counters { get; set; }
         internal DbSet<Admin> Admins { get; set; }
+        internal DbSet<NewsPost> NewsPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +27,7 @@ namespace Chuvashia.NationalProjects.Context
                     .HasColumnType("decimal")
                     .IsRequired();
             });
+
             modelBuilder.Entity<Admin>(builder =>
             {
                 builder.ToTable("Admins");
@@ -55,6 +54,27 @@ namespace Chuvashia.NationalProjects.Context
                     .IsRequired();
                 builder.Property(o => o.Role)
                     .HasConversion<string>()
+                    .IsRequired();
+            });
+
+            modelBuilder.Entity<NewsPost>(builder =>
+            {
+                builder.ToTable("NewsPosts");
+                builder.HasKey(o => o.Id);
+                builder.Property(o => o.Id)
+                    .ValueGeneratedNever();
+                builder.Property(o => o.Type)
+                    .HasConversion<string>()
+                    .IsRequired();
+                builder.Property(o => o.Title)
+                    .HasMaxLength(258)
+                    .IsRequired();
+                builder.Property(o => o.Text)
+                    .IsRequired();
+                builder.Property(o => o.CreateDate)
+                    .IsRequired();
+                builder.Property(o => o.IsArchived)
+                    .HasDefaultValue(false)
                     .IsRequired();
             });
         }

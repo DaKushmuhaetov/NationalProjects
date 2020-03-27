@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -7,6 +8,9 @@ using System.Threading.Tasks;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
 using Microsoft.AspNetCore.Http;
+=======
+﻿using Chuvashia.NationalProjects.Context;
+>>>>>>> fb47268ee944dd070a1951682c26266d9534f203
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

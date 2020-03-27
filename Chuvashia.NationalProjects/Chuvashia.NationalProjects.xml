@@ -4,6 +4,31 @@
         <name>Chuvashia.NationalProjects</name>
     </assembly>
     <members>
+        <member name="P:Chuvashia.NationalProjects.Binding.GetNewsListBinding.Offset">
+            <summary>
+            Offset for pagination. Optional. 0 by default.
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Binding.GetNewsListBinding.Limit">
+            <summary>
+            Number of items per page. Optional. 10 by default.
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Binding.GetNewsListBinding.StartDate">
+            <summary>
+            Date from which start counting. Optional.
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Binding.GetNewsListBinding.EndDate">
+            <summary>
+            Date from which end counting. Optional.
+            </summary>
+        </member>
+        <member name="P:Chuvashia.NationalProjects.Binding.GetNewsListBinding.Type">
+            <summary>
+            Type of news. Optional. All by default.
+            </summary>
+        </member>
         <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.GetCounters(System.Threading.CancellationToken)">
             <summary>
             Get list of counters
@@ -25,6 +50,39 @@
             <summary>
             Update counter
             </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.GetNewsPosts(Chuvashia.NationalProjects.Binding.GetNewsListBinding,System.Threading.CancellationToken)">
+            <summary>
+            Get list of news
+            </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.GetNewsPost(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Get news post by id
+            </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.CreateNewsPost(Chuvashia.NationalProjects.Binding.CreateNewsBinding,System.Threading.CancellationToken)">
+            <summary>
+            Create a news post at selected national project
+            </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.UpdatePost(System.Guid,Chuvashia.NationalProjects.Binding.CreateNewsBinding,System.Threading.CancellationToken)">
+            <summary>
+            Update a news post
+            </summary>
+            <param name="id">News post id</param>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.ArchivePost(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Archive a news post
+            </summary>
+            <param name="id">News post id</param>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.NewsController.UnArchivePost(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Unarchive a news post
+            </summary>
+            <param name="id">News post id</param>
         </member>
         <member name="P:Chuvashia.NationalProjects.Model.Admin.FirstName">
             <summary>
