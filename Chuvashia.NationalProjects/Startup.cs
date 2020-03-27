@@ -1,4 +1,5 @@
 using Chuvashia.NationalProjects.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Chuvashia.NationalProjects.Gallery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IO;
 using System.Net;
@@ -27,6 +29,23 @@ namespace Chuvashia.NationalProjects
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                        options.RequireHttpsMetadata = false;
+                        options.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidIssuer = AuthOptions.ISSUER,
+                            ValidateAudience = true,
+                            ValidAudience = AuthOptions.AUDIENCE,
+                            ValidateLifetime = true,
+                            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                            ValidateIssuerSigningKey = true,
+                        };
+                    });
+            services.AddControllersWithViews();
+
             string connection = Configuration.GetConnectionString("DbConnection");
 
             services.AddDbContext<NationalProjectsDbContext>(options =>
@@ -58,6 +77,9 @@ namespace Chuvashia.NationalProjects
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
@@ -66,6 +88,8 @@ namespace Chuvashia.NationalProjects
             app.UseRewriter(new RewriteOptions().AddRedirect(@"^$", "swagger", (int)HttpStatusCode.Redirect));
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
