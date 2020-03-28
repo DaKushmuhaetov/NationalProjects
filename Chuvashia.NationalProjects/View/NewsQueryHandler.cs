@@ -1,7 +1,6 @@
 ﻿using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model.News;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -17,14 +16,12 @@ namespace Chuvashia.NationalProjects.View
             _context = context;
         }
 
-        
-
         public async Task<Page<NewsPost>> GetPage(GetNewsListBinding binding)
         {
             var newsQuery = _context.NewsPosts
                 .AsNoTracking()
                 .Where(o => o.IsArchived != true)
-                .Where(o => o.Title.IndexOf(binding.TitleFilter)>=0);            
+                .Where(o => o.Title.IndexOf(binding.TitleFilter) >= 0);            
 
             #region Date filters
 
