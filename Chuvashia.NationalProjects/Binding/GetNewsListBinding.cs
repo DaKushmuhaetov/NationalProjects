@@ -30,6 +30,7 @@ namespace Chuvashia.NationalProjects.Binding
         /// </summary>
         [JsonConverter(typeof(NewsTypeBinding))]
         public NewsTypeBinding Type { get; set; } = NewsTypeBinding.All;
+
         /// <summary>
         /// String which is filtered
         /// </summary>
@@ -54,6 +55,4 @@ namespace Chuvashia.NationalProjects.Binding
                 .InclusiveBetween(2, 1000);
         }
     }
-
-    
 }
