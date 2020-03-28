@@ -25,7 +25,6 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Get list of news
         /// </summary>
-        [Authorize(AuthenticationSchemes = "admin")]
         [HttpGet("news")]
         [ProducesResponseType(typeof(Page<NewsPost>), 200)]
         public async Task<ActionResult<Page<NewsPost>>> GetNewsPosts(
