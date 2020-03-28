@@ -46,9 +46,8 @@ namespace Chuvashia.NationalProjects
                             ValidateIssuerSigningKey = true,
                         };
                     });
-            services.AddControllersWithViews();
 
-            string connection = Configuration.GetConnectionString("DbConnection");
+            string connection = Configuration.GetConnectionString("LocalSqlServer");
 
             services.AddDbContext<NationalProjectsDbContext>(options =>
                 options.UseSqlServer(connection));

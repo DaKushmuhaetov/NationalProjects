@@ -29,7 +29,13 @@ namespace Chuvashia.NationalProjects.Controllers
         public async Task<ActionResult<List<Counter>>> GetCounters(
             CancellationToken cancellationToken)
         {
-            return await _context.Counters.ToListAsync(cancellationToken);
+            try
+            {
+                return await _context.Counters.ToListAsync(cancellationToken);
+            }catch(Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         /// <summary>
