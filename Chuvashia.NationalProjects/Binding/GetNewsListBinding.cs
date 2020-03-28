@@ -32,7 +32,7 @@ namespace Chuvashia.NationalProjects.Binding
         public NewsTypeBinding Type { get; set; } = NewsTypeBinding.All;
 
         /// <summary>
-        /// String which is filtered
+        /// Filter by title. Optional.
         /// </summary>
         public string TitleFilter { get; set; }
     }
