@@ -2,6 +2,7 @@
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model.News;
 using Chuvashia.NationalProjects.View;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -24,6 +25,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Get list of news
         /// </summary>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpGet("news")]
         [ProducesResponseType(typeof(Page<NewsPost>), 200)]
         public async Task<ActionResult<Page<NewsPost>>> GetNewsPosts(

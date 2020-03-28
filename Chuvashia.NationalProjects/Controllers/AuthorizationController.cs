@@ -54,7 +54,11 @@ namespace Chuvashia.NationalProjects.Controllers
             return response;
         }
         
-        [HttpPost("login")]
+        /// <summary>
+        /// Authorization by login and password
+        /// </summary>
+        [ProducesResponseType(typeof(Admin), 200)]
+        [HttpPost("admin/login")]
         public async Task<ActionResult<Admin>> Login([FromBody]AuthorizationBinding binding)
         {
             Admin admin = await _context.Admins.Where(o => o.Login == binding.Login && o.Password == binding.Password).FirstOrDefaultAsync();
@@ -66,6 +70,37 @@ namespace Chuvashia.NationalProjects.Controllers
             {
                 return Unauthorized();
             }
-        } 
+        }
+
+        /// <summary>
+        /// Create a new test administrator
+        /// </summary>
+        [ProducesResponseType(typeof(Admin), 200)]
+        [HttpPost("admin/test")]
+        public async Task<ActionResult<Admin>> CreateTestAdmin()
+        {
+            var count = await _context.Admins.CountAsync();
+            if(count > 0)
+            {
+                return BadRequest("Admin exists");
+            }
+
+            var admin = new Admin()
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Сазонов",
+                MiddleName = "Иван",
+                LastName = "Васильевич",
+                Login = "admin",
+                Password = "admin",
+                Phone = "+79225401010",
+                Role = AdminRole.Admin
+            };
+
+            _context.Admins.Add(admin);
+            await _context.SaveChangesAsync();
+
+            return Ok(admin);
+        }
     }
 }

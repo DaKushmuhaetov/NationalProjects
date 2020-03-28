@@ -29,6 +29,16 @@
             Type of news. Optional. All by default.
             </summary>
         </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.AuthorizationController.Login(Chuvashia.NationalProjects.Binding.AuthorizationBinding)">
+            <summary>
+            Authorization by login and password
+            </summary>
+        </member>
+        <member name="M:Chuvashia.NationalProjects.Controllers.AuthorizationController.CreateTestAdmin">
+            <summary>
+            Create a new test administrator
+            </summary>
+        </member>
         <member name="M:Chuvashia.NationalProjects.Controllers.CountersController.GetCounters(System.Threading.CancellationToken)">
             <summary>
             Get list of counters

@@ -16,7 +16,7 @@ namespace Chuvashia.NationalProjects.Gallery
 
         public async Task<string> PostPhoto()
         {
-
+            return "";
         }
     }
 }
