@@ -31,7 +31,7 @@ namespace Chuvashia.NationalProjects.Binding
         [JsonConverter(typeof(NewsTypeBinding))]
         public NewsTypeBinding Type { get; set; } = NewsTypeBinding.All;
         /// <summary>
-        /// 
+        /// String which is filtered
         /// </summary>
         public string TitleFilter { get; set; }
     }
