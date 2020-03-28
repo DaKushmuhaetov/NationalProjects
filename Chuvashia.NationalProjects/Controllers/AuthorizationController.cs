@@ -2,6 +2,7 @@ using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
 using Chuvashia.NationalProjects.View;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -53,10 +54,11 @@ namespace Chuvashia.NationalProjects.Controllers
             };
             return response;
         }
-        
+
         /// <summary>
         /// Authorization by login and password
         /// </summary>
+        [Authorize(AuthenticationSchemes = "admin")]
         [ProducesResponseType(typeof(Admin), 200)]
         [HttpPost("admin/login")]
         public async Task<ActionResult<Admin>> Login([FromBody]AuthorizationBinding binding)
@@ -75,6 +77,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Create a new test administrator
         /// </summary>
+        [Authorize(AuthenticationSchemes = "admin")]
         [ProducesResponseType(typeof(Admin), 200)]
         [HttpPost("admin/test")]
         public async Task<ActionResult<Admin>> CreateTestAdmin()
