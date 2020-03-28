@@ -48,7 +48,7 @@ namespace Chuvashia.NationalProjects
                     });
             services.AddControllersWithViews();
 
-            string connection = Configuration.GetConnectionString("LocalSqlServer");
+            string connection = Configuration.GetConnectionString("DbConnection");
 
             services.AddDbContext<NationalProjectsDbContext>(options =>
                 options.UseSqlServer(connection));
