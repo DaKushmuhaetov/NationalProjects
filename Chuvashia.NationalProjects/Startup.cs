@@ -48,7 +48,7 @@ namespace Chuvashia.NationalProjects
                     });
             services.AddControllersWithViews();
 
-            string connection = Configuration.GetConnectionString("DbConnection");
+            string connection = Configuration.GetConnectionString("LocalSqlServer");
 
             services.AddDbContext<NationalProjectsDbContext>(options =>
                 options.UseSqlServer(connection));
@@ -76,7 +76,7 @@ namespace Chuvashia.NationalProjects
                     Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                swagger.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
+                swagger.AddSecurityRequirement(new OpenApiSecurityRequirement()
                 {
                     {
                         new OpenApiSecurityScheme
