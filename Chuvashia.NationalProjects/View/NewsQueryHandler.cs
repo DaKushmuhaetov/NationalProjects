@@ -20,7 +20,8 @@ namespace Chuvashia.NationalProjects.View
         {
             var newsQuery = _context.NewsPosts
                 .AsNoTracking()
-                .Where(o => o.IsArchived != true);
+                .Where(o => o.IsArchived != true)
+                .Where(o => o.Title == ) 
 
             #region Date filters
 

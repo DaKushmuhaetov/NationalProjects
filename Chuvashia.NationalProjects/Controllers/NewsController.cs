@@ -133,5 +133,7 @@ namespace Chuvashia.NationalProjects.Controllers
 
             return Ok(newsPost);
         }
+
+        [HttpGet("news")]
     }
 }

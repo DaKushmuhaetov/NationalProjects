@@ -30,6 +30,10 @@ namespace Chuvashia.NationalProjects.Binding
         /// </summary>
         [JsonConverter(typeof(NewsTypeBinding))]
         public NewsTypeBinding Type { get; set; } = NewsTypeBinding.All;
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TitleFilter { get; set; }
     }
 
     public enum NewsTypeBinding
@@ -50,4 +54,6 @@ namespace Chuvashia.NationalProjects.Binding
                 .InclusiveBetween(2, 1000);
         }
     }
+
+    
 }
