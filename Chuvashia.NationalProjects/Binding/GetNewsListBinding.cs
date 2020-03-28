@@ -30,6 +30,11 @@ namespace Chuvashia.NationalProjects.Binding
         /// </summary>
         [JsonConverter(typeof(NewsTypeBinding))]
         public NewsTypeBinding Type { get; set; } = NewsTypeBinding.All;
+
+        /// <summary>
+        /// Filter by title. Optional.
+        /// </summary>
+        public string TitleFilter { get; set; }
     }
 
     public enum NewsTypeBinding
