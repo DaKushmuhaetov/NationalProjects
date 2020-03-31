@@ -58,7 +58,6 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Authorization by login and password
         /// </summary>
-        [Authorize(AuthenticationSchemes = "admin")]
         [ProducesResponseType(typeof(Admin), 200)]
         [HttpPost("admin/login")]
         public async Task<ActionResult<Admin>> Login([FromBody]AuthorizationBinding binding)
@@ -77,7 +76,6 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Create a new test administrator
         /// </summary>
-        [Authorize(AuthenticationSchemes = "admin")]
         [ProducesResponseType(typeof(Admin), 200)]
         [HttpPost("admin/test")]
         public async Task<ActionResult<Admin>> CreateTestAdmin()
@@ -91,9 +89,9 @@ namespace Chuvashia.NationalProjects.Controllers
             var admin = new Admin()
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Сазонов",
-                MiddleName = "Иван",
-                LastName = "Васильевич",
+                FirstName = "Г‘Г Г§Г®Г­Г®Гў",
+                MiddleName = "Г€ГўГ Г­",
+                LastName = "Г‚Г Г±ГЁГ«ГјГҐГўГЁГ·",
                 Login = "admin",
                 Password = "admin",
                 Phone = "+79225401010",
