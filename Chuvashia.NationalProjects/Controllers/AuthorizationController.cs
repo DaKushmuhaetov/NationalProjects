@@ -2,6 +2,7 @@ using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
 using Chuvashia.NationalProjects.View;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -53,7 +54,7 @@ namespace Chuvashia.NationalProjects.Controllers
             };
             return response;
         }
-        
+
         /// <summary>
         /// Authorization by login and password
         /// </summary>
@@ -88,9 +89,9 @@ namespace Chuvashia.NationalProjects.Controllers
             var admin = new Admin()
             {
                 Id = Guid.NewGuid(),
-                FirstName = "Сазонов",
-                MiddleName = "Иван",
-                LastName = "Васильевич",
+                FirstName = "Г‘Г Г§Г®Г­Г®Гў",
+                MiddleName = "Г€ГўГ Г­",
+                LastName = "Г‚Г Г±ГЁГ«ГјГҐГўГЁГ·",
                 Login = "admin",
                 Password = "admin",
                 Phone = "+79225401010",

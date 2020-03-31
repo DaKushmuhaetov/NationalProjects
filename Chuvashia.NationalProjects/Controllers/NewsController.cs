@@ -49,6 +49,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Create a news post at selected national project
         /// </summary>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPost("news")]
         [ProducesResponseType(typeof(NewsPost), 200)]
         public async Task<ActionResult<NewsPost>> CreateNewsPost(
@@ -75,6 +76,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// Update a news post
         /// </summary>
         /// <param name="id">News post id</param>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPut("news/{id}")]
         [ProducesResponseType(typeof(NewsPost), 200)]
         public async Task<ActionResult<NewsPost>> UpdatePost(
@@ -99,6 +101,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// Archive a news post
         /// </summary>
         /// <param name="id">News post id</param>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPut("news/archive/{id}")]
         public async Task<IActionResult> ArchivePost(
             [FromRoute] Guid id,
@@ -119,6 +122,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// Unarchive a news post
         /// </summary>
         /// <param name="id">News post id</param>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPut("news/unarchive/{id}")]
         [ProducesResponseType(typeof(NewsPost), 200)]
         public async Task<ActionResult<NewsPost>> UnArchivePost(

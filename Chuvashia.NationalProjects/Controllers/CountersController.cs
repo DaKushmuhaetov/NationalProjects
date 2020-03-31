@@ -1,6 +1,7 @@
 ﻿using Chuvashia.NationalProjects.Binding;
 using Chuvashia.NationalProjects.Context;
 using Chuvashia.NationalProjects.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -42,6 +43,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// Create new counter
         /// </summary>
         /// <param name="counter">New counter</param>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPost("counters")]
         [ProducesResponseType(typeof(Counter), 201)]
         public async Task<ActionResult<Counter>> AddCounter([FromBody] CounterBinding binding,
@@ -75,6 +77,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// Remove counter
         /// </summary>
         /// <param name="id">Counter id</param>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpDelete("counters/{id}")]
         public async Task<IActionResult> RemoveCounter([FromRoute]Guid id,
             CancellationToken cancellationToken)
@@ -90,6 +93,7 @@ namespace Chuvashia.NationalProjects.Controllers
         /// <summary>
         /// Update counter
         /// </summary>
+        [Authorize(AuthenticationSchemes = "admin")]
         [HttpPut("counter/{id}/{amount}")]
         public async Task<ActionResult<Counter>> UpdateCounter([FromRoute]Guid id,
             [FromRoute]decimal amount,
